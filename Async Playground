@@ -1,0 +1,15 @@
+ }   public static class AsyncPalyground
+    {
+        public static async Task OperacaoDemorada() 
+        {
+            await Task.Delay(2000); // simula uma operação demorada de 2 segundos
+            Console.WriteLine("Operação concluída");
+        }
+        private static async Task ExemploOperacoesIntensivas()
+        {
+            Console.WriteLine("INICIO DA OPERAÇÃO 3");
+        }
+
+    }   
+   
+}
