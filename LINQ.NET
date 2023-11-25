@@ -1,0 +1,100 @@
+} namespace LINQ.NET
+    internal class RunSample
+    {
+        public static async Task AllEx()
+        {
+            Pet[] pets =
+            {
+                new Pet {Name = "Barley", Age=10 },
+                new Pet { Name = "Boots", Age=1 },
+                new Pet { Name = "Whiskers", Age=6 },
+            };
+
+            bool AllStartWithB = pets.Where(x => x.Age>=5).All(pet => pet.Name.StartsWith("B"));
+
+            Console.WriteLine(
+                "{0} pet names start with 'B'",
+              AllStartWithB ? "ALL" : "Not all");
+        }
+
+        public static async Task AnyEx()
+        {
+            Pet[] pets =
+            {
+                new Pet {Name = "Barley", Age=10 },
+                new Pet { Name = "Boots", Age=1 },
+                new Pet { Name = "Whiskers", Age=6 },
+            };
+
+            bool AllStartWithB = pets.Where(x => x.Age >= 5).Any(pet => pet.Name.StartsWith("B"));
+
+            Console.WriteLine(
+                "{0} pet names start with 'B'",
+              AllStartWithB ? "ALL" : "Not all");
+        }
+
+        public static async Task Average()
+        {
+            Pet[] pets =
+            {
+                new Pet {Name = "Barley", Age=10 },
+                new Pet { Name = "Boots", Age=1 },
+                new Pet { Name = "Whiskers", Age=6 },
+            };
+
+            var petsAgeAverage = pets.Average(pet => pet.Age);
+
+            List<int> grades = new List<int> { 70, 92, 100, 37, 81 };
+
+            double average = grades.Average();
+
+            Console.WriteLine("The average grade is {0}.", average);
+        }
+        public static async Task CastEx()
+        {
+            ArrayList fruits = new ArrayList
+            {
+                "mango"
+                ,
+               "apple"
+               ,
+               "lemon"
+            };
+            IEnumerable<string> query =
+                fruits.Cast<String>().OrderBy(fruit => fruit).Select(fruit => fruit);
+
+            foreach (string fruit in query)
+            {
+                Console.WriteLine(fruit);
+            }
+        }
+
+        public static async Task ConcatEx()
+        {
+            Pet[] cats =
+            {
+                new Pet {Name = "Barley", Age=8 },
+                new Pet { Name = "Boots", Age=4 },
+                new Pet { Name = "Whiskers", Age=6 },
+            };
+
+            Pet[] dogs =
+            {
+                new Pet {Name = "Bounder", Age=3 },
+                new Pet { Name = "Snoopy", Age=14 },
+                new Pet { Name = "Fido", Age=9 },
+            };
+            IEnumerable<string> query =
+                cats.Select(cat => cat.Name).Concat(dogs.Select(dog => dog.Name));
+
+            IEnumerable<Pet> concatResult = cats.Concat(dogs);
+
+            foreach (string name in query)
+            {
+                Console.WriteLine(name);
+
+            }
+        }
+}
+        
+    }
