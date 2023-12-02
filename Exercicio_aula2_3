@@ -1,0 +1,65 @@
+using System;
+
+public class Livro
+{
+    public string Titulo { get; set; }
+    	public string Autor { get; set; }
+    public int QuantidadeTotal { get; set; }
+    public int QuantidadeDisponivel { get; set; }
+}
+
+public class Biblioteca
+{
+    public void EmprestarLivro(Livro livro)
+    {
+        if (livro == null)
+        {
+            throw new ArgumentNullException(nameof(livro), "O livro não pode ser nulo.");
+        }
+
+        if (livro.QuantidadeDisponivel <= 0)
+        {
+            throw new InvalidOperationException("O livro não está disponível para empréstimo.");
+        }
+
+        // Realizar o empréstimo decrementando a quantidade disponível
+        livro.QuantidadeDisponivel--;
+
+        Console.WriteLine($"Livro emprestado: {livro.Titulo}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            Biblioteca biblioteca = new Biblioteca();
+
+            // Criando um livro
+            Livro meuLivro = new Livro
+            {
+                Titulo = "Aventuras na Biblioteca",
+                Autor = "Autor Desconhecido",
+                QuantidadeTotal = 5,
+                QuantidadeDisponivel = 3
+            };
+
+            // Tentando realizar o empréstimo
+            biblioteca.EmprestarLivro(meuLivro);
+
+            // Tentando emprestar novamente (deverá gerar exceção)
+            biblioteca.EmprestarLivro(meuLivro);
+        }
+        catch (ArgumentNullException ex)
+        {
+            Console.WriteLine($"Erro: {ex.Message}");
+        }
+        catch (InvalidOperationException ex)
+        {
+            Console.WriteLine($"Erro: {ex.Message}");
+        }
+    }
+}
+
