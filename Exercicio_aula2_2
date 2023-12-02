@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class ListaNumeros
+{
+    public List<int> Numeros { get; } = new List<int>();
+
+    public void AdicionarNumero(int numero)
+    {
+        Numeros.Add(numero);
+    }
+}
+
+public static class ListaNumerosExtensions
+{
+    public static int CalcularSoma(this ListaNumeros lista)
+    {
+        return lista.Numeros.Sum();
+    }
+
+    public static double CalcularMedia(this ListaNumeros lista)
+    {
+        if (lista.Numeros.Count == 0)
+            return 0;
+
+        return lista.Numeros.Average();
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        ListaNumeros lista = new ListaNumeros();
+
+        // Adicionando alguns números à lista
+        lista.AdicionarNumero(5);
+        lista.AdicionarNumero(10);
+        lista.AdicionarNumero(15);
+
+        // Calculando a soma e a média
+        int soma = lista.CalcularSoma();
+        double media = lista.CalcularMedia();
+
+        // Exibindo os resultados
+        Console.WriteLine($"Soma: {soma}");
+        Console.WriteLine($"Média: {media}");
+    }
+}
